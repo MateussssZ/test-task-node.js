@@ -3,6 +3,7 @@ import authRouter from "./authRouter.js"
 import express from "express"
 import dotenv from "dotenv"
 import mongoose  from "mongoose"
+import addDoctors from "./migrations/addDoctors.js"
 
 dotenv.config() //Подключаем переменные окружения из файла .env
 const app = express()
@@ -27,3 +28,4 @@ async function  startApp() { //Асинхронно подключаемся к 
 }
 
 startApp()
+addDoctors() //Добавить случайных докторов, если в БД никого нет(для теста)
