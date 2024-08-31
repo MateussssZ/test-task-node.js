@@ -7,7 +7,7 @@ import Doctor from "./db_schemas/doctor.js"
 
 dotenv.config()
 const app = express()
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 7777
 const DB_URL = 'mongodb+srv://matvey:z1z2z3@cluster0.yv6uw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 
 app.use(express.json())
