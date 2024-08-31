@@ -32,11 +32,11 @@ startApp()
 // function createSome(){
 //     Doctor.create({
 //         "spec":"Стоматолог",
-//         "name":"Димас",
-//         "surname":"Димасыч",
+//         "name":"Проверка4",
+//         "surname":"Проверка 1",
 //         "phone":"832193921123",
 //         "age":70,
-//         "dates": [ new Date("2020-10-10T15:30:00Z")]
+//         "dates": [ new Date("2024-08-31T14:11:00Z"), new Date("2024-08-31T16:11:00Z")]
          
 //      })
 // }

@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 import Doctor from "../db_schemas/doctor.js";
-import Patient from "../db_schemas/patient.js";
 import Appointment from "../db_schemas/appointment.js";
-import jwt from "jsonwebtoken";
+import Scheduler from "../scheduler/scheduler.js";
 
 class AppointController{
     async makeAppointment(req,res){
@@ -19,13 +18,14 @@ class AppointController{
             let slots = doctor.dates
 
             if (checkForDate(slotDate,slots)){
-                console.log(doctor.dates)
                 doctor.save()
                 Appointment.create({
-                    patient_id: req.user.id,
-                    doctor_id: doctor._id,
-                    slotDate
+                    "patient_id": req.user.id,
+                    "doctor_id": doctor._id,
+                    "slot" : slotDate
                 })
+
+                new Scheduler(doctor, slotDate)
                 res.status(200).json({message:`Вы успешно записались к ${doctor.spec} ${doctor.name} на время ${slot}`})
             }else{
                 res.status(400).json({message:`Нет свободного слота на это время`})
