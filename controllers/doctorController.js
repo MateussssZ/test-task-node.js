@@ -19,7 +19,7 @@ class DoctorController{
                 res.status(400).json({message:"Не указан id доктора!"})
             }
             const doctor = await Doctor.findOne({_id: id})
-            res.json(doctor.dates[0])
+            res.json(doctor)
         }catch(e){
             console.log(e)
             res.status(500).json(e)

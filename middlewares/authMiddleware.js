@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
+
+dotenv.config()
 const secret = process.env.secret || "plug"
 
 export default function(req, res, next){

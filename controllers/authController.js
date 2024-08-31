@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs"
-import Patient from "../db_schemas/patient"
+import Patient from "../db_schemas/patient.js"
 import { validationResult } from "express-validator"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
@@ -15,7 +15,7 @@ class authController{
             }
 
             const {username,password,name,surname,age,number} = req.body
-            const candidate = Patient.findOne({username})
+            const candidate = await Patient.findOne({username})
             if (candidate){
                 return res.status(400).json("Пользователь с таким именем уже существует")
             }
@@ -33,7 +33,7 @@ class authController{
     async login(req, res){
         try{
             const {username,password} = req.body
-            const patient = Patient.findOne({username})
+            const patient = await Patient.findOne({username})
             if (!patient){
                 return res.status(400).json("Пользователь с таким именем не существует")
             }
