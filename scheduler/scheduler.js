@@ -1,5 +1,7 @@
 import schedule from "node-schedule"
 
+//Класс для планирования событий при записи.
+
 class Scheduler{
     constructor(doctor,slotDate){
         this.doctor = doctor
@@ -8,14 +10,14 @@ class Scheduler{
         this._appointmentReminder()
     }
 
-    _returnSlotToDB(){
-        const job = schedule.scheduleJob(this.slotDate, async function(doctor, slotDate){
-            doctor.dates.push(slotDate)
-            doctor.save()
-        }.bind(null, this.doctor, this.slotDate))
+    _returnSlotToDB(){ //Данный планировщик ждёт начала времени приёма, чтобы вернуть слот для доктора в БД(но надо бы придумать и доработать систему, как это время возвращаться будет,
+        const job = schedule.scheduleJob(this.slotDate, async function(doctor, slotDate){ //например, приплюсовывать один день от даты слота)
+            doctor.dates.push(slotDate)  
+            doctor.save() //Сохраняем изменения в БД
+        }.bind(null, this.doctor, this.slotDate)) //Это для передачи переменных в нашу функцию
     }
 
-    _appointmentReminder(){
+    _appointmentReminder(){ //Данный планировщик предупреждает пользователя за 2 часа до приёма
         let remindDate = new Date(this.slotDate)
         remindDate.setHours(remindDate.getHours() - 2)
         console.log(remindDate)
